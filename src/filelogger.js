@@ -1,9 +1,8 @@
 /* global angular, console */
 
 // install   :     cordova plugin add org.apache.cordova.file
-// install   :     bower install ngCordova
 
-angular.module('fileLogger', [])
+angular.module('fileLogger', ['ngCordova'])
 
   .factory('$fileLogger', ['$q', '$window', '$cordovaFile', '$timeout', function ($q, $window, $cordovaFile, $timeout) {
     'use strict';
