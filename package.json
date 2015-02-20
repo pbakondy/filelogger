@@ -2,7 +2,7 @@
   "name": "Cordova File Logger",
   "private": false,
   "main": "dist/filelogger",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "repository": {
     "url": "git://github.com/pbakondy/filelogger.git"
   },
