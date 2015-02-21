@@ -1,6 +1,8 @@
 Cordova File Logger
 ==========
 
+[![Bower](http://img.shields.io/badge/bower-filelogger-FFCC2F.svg?style=flat)](http://bower.io/search/?q=filelogger)
+
 Logger module for Cordova/Ionic projects.
 
 When you run your application in device the Logger writes in the local filesystem (with cordova-plugin-file) and the system logs (with console.log).
