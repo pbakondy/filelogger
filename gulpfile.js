@@ -9,6 +9,12 @@ var gulp = require('gulp'),
 gulp.task('default', ['build']);
 
 gulp.task('build', function () {
+  gulp.src(buildConfig.pluginFiles)
+    .pipe(header(buildConfig.closureStart))
+    .pipe(footer(buildConfig.closureEnd))
+    .pipe(header(buildConfig.banner))
+    .pipe(gulp.dest(buildConfig.dist));
+
   return gulp.src(buildConfig.pluginFiles)
     .pipe(header(buildConfig.closureStart))
     .pipe(footer(buildConfig.closureEnd))
