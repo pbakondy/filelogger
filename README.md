@@ -39,6 +39,22 @@ You can put here any javascript type (string, number, boolean, object, array).
 
 In the logfile every item starts with the current UTC timestamp, followed by the log level and the message.
 
+### $fileLogger.debug()
+
+Wrapper for $fileLogger.log('debug', ...)
+
+### $fileLogger.info()
+
+Wrapper for $fileLogger.log('info', ...)
+
+### $fileLogger.warn()
+
+Wrapper for $fileLogger.log('warn', ...)
+
+### $fileLogger.error()
+
+Wrapper for $fileLogger.log('error', ...)
+
 ### $fileLogger.setStorageFilename()
 
 You can set the local filename (default messages.log). It requests one parameter, the filename (type string).
@@ -68,6 +84,11 @@ app.controller('mainCtrl', ['$scope', '$fileLogger', function($scope, $fileLogge
     $fileLogger.log('info', 'message');
     $fileLogger.log('warn', 'message');
     $fileLogger.log('error', 'message');
+
+    $fileLogger.debug('message');
+    $fileLogger.info('message');
+    $fileLogger.warn('message');
+    $fileLogger.error('message');
 
     $fileLogger.log('error', 'error message', { code: 1, meaning: 'general' });
 

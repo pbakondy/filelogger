@@ -21,6 +21,11 @@ angular.module('fileLogger', ['ngCordova'])
     var storageFilename = 'messages.log';
 
 
+    function isBrowser() {
+      return (!$window.cordova && !$window.PhoneGap && !$window.phonegap);
+    }
+
+
     function log(level) {
       if (angular.isString(level)) {
         level = level.toUpperCase();
@@ -49,41 +54,49 @@ angular.module('fileLogger', ['ngCordova'])
         }
       }
 
-      messages.unshift(timestamp);
+      if (isBrowser()) {
+        // log to browser console
 
-      if (angular.isObject(console) && angular.isFunction(console.log)) {
-        switch (level) {
-          case 'DEBUG':
-            if (angular.isFunction(console.debug)) {
-              console.debug.apply(console, messages);
-            } else {
+        messages.unshift(timestamp);
+
+        if (angular.isObject(console) && angular.isFunction(console.log)) {
+          switch (level) {
+            case 'DEBUG':
+              if (angular.isFunction(console.debug)) {
+                console.debug.apply(console, messages);
+              } else {
+                console.log.apply(console, messages);
+              }
+              break;
+            case 'INFO':
+              if (angular.isFunction(console.debug)) {
+                console.info.apply(console, messages);
+              } else {
+                console.log.apply(console, messages);
+              }
+              break;
+            case 'WARN':
+              if (angular.isFunction(console.debug)) {
+                console.warn.apply(console, messages);
+              } else {
+                console.log.apply(console, messages);
+              }
+              break;
+            case 'ERROR':
+              if (angular.isFunction(console.debug)) {
+                console.error.apply(console, messages);
+              } else {
+                console.log.apply(console, messages);
+              }
+              break;
+            default:
               console.log.apply(console, messages);
-            }
-            break;
-          case 'INFO':
-            if (angular.isFunction(console.debug)) {
-              console.info.apply(console, messages);
-            } else {
-              console.log.apply(console, messages);
-            }
-            break;
-          case 'WARN':
-            if (angular.isFunction(console.debug)) {
-              console.warn.apply(console, messages);
-            } else {
-              console.log.apply(console, messages);
-            }
-            break;
-          case 'ERROR':
-            if (angular.isFunction(console.debug)) {
-              console.error.apply(console, messages);
-            } else {
-              console.log.apply(console, messages);
-            }
-            break;
-          default:
-            console.log.apply(console, messages);
+          }
         }
+
+      } else {
+        // log to logcat
+        console.log(message.join(' '));
       }
 
       queue.push({ message: message.join(' ') + '\n' });
@@ -201,11 +214,43 @@ angular.module('fileLogger', ['ngCordova'])
     }
 
 
+    function debug() {
+      var args = Array.prototype.slice.call(arguments, 0);
+      args.unshift('DEBUG');
+      log.apply(undefined, args);
+    }
+
+
+    function info() {
+      var args = Array.prototype.slice.call(arguments, 0);
+      args.unshift('INFO');
+      log.apply(undefined, args);
+    }
+
+
+    function warn() {
+      var args = Array.prototype.slice.call(arguments, 0);
+      args.unshift('WARN');
+      log.apply(undefined, args);
+    }
+
+
+    function error() {
+      var args = Array.prototype.slice.call(arguments, 0);
+      args.unshift('ERROR');
+      log.apply(undefined, args);
+    }
+
+
     return {
       log: log,
       getLogfile: getLogfile,
       deleteLogfile: deleteLogfile,
-      setStorageFilename: setStorageFilename
+      setStorageFilename: setStorageFilename,
+      debug: debug,
+      info: info,
+      warn: warn,
+      error: error
     };
 
   }]);

@@ -2,7 +2,7 @@
   "name": "filelogger",
   "private": false,
   "main": "dist/filelogger",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "repository": {
     "url": "git://github.com/pbakondy/filelogger.git"
   },
