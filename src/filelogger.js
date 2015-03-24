@@ -1,8 +1,8 @@
-/* global angular, console */
+/* global angular, console, cordova */
 
 // install   :     cordova plugin add org.apache.cordova.file
 
-angular.module('fileLogger', ['ngCordova'])
+angular.module('fileLogger', ['ngCordova.plugins.file'])
 
   .factory('$fileLogger', ['$q', '$window', '$cordovaFile', '$timeout', function ($q, $window, $cordovaFile, $timeout) {
     'use strict';
@@ -130,7 +130,7 @@ angular.module('fileLogger', ['ngCordova'])
     function writeLog(message) {
       var q = $q.defer();
 
-      if (!$window.cordova) {
+      if (isBrowser()) {
         // running in browser with 'ionic serve'
 
         if (!$window.localStorage[storageFilename]) {
@@ -142,12 +142,28 @@ angular.module('fileLogger', ['ngCordova'])
 
       } else {
 
-        $cordovaFile.writeFile(storageFilename, message, { append: true }).then(
+        $cordovaFile.checkFile(cordova.file.dataDirectory, storageFilename).then(
           function() {
-            q.resolve();
+            // writeExistingFile(path, fileName, text)
+            $cordovaFile.writeExistingFile(cordova.file.dataDirectory, storageFilename, message).then(
+              function() {
+                q.resolve();
+              },
+              function(error) {
+                q.reject(error);
+              }
+            );
           },
-          function(error) {
-            q.reject(error);
+          function() {
+            // writeFile(path, fileName, text, replaceBool)
+            $cordovaFile.writeFile(cordova.file.dataDirectory, storageFilename, message, true).then(
+              function() {
+                q.resolve();
+              },
+              function(error) {
+                q.reject(error);
+              }
+            );
           }
         );
 
@@ -160,10 +176,10 @@ angular.module('fileLogger', ['ngCordova'])
     function getLogfile() {
       var q = $q.defer();
 
-      if (!$window.cordova) {
+      if (isBrowser()) {
         q.resolve($window.localStorage[storageFilename]);
       } else {
-        $cordovaFile.readAsText(storageFilename).then(
+        $cordovaFile.readAsText(cordova.file.dataDirectory, storageFilename).then(
           function(result) {
             q.resolve(result);
           },
@@ -180,11 +196,11 @@ angular.module('fileLogger', ['ngCordova'])
     function deleteLogfile() {
       var q = $q.defer();
 
-      if (!$window.cordova) {
+      if (isBrowser()) {
         $window.localStorage.removeItem(storageFilename);
         q.resolve();
       } else {
-        $cordovaFile.removeFile(storageFilename).then(
+        $cordovaFile.removeFile(cordova.file.dataDirectory, storageFilename).then(
           function(result) {
             q.resolve(result);
           },

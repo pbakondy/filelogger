@@ -11,7 +11,7 @@ When you run your application in browser with „ionic serve” the Logger uses 
 
 ## Dependencies
 
-- [ngCordova](http://ngcordova.com/)
+- [ngCordova](http://ngcordova.com/) ( required version v0.1.14-alpha )
 - [org.apache.cordova.file](https://github.com/apache/cordova-plugin-file)
 
 ## Installation
@@ -29,6 +29,9 @@ Include *filelogger.min.js* and ng-cordova.js or *ng-cordova.min.js* in your ind
 <script src="lib/filelogger/dist/filelogger.min.js"></script>
 <script src="cordova.js"></script>
 ```
+
+Comment: you don't have to use the complete ngCordova package. I suggest to create a [Custom Build](http://ngcordova.com/build/) with file module.
+
 
 ## Usage
 
@@ -72,9 +75,8 @@ You can delete the logfile from the filestore. This method returns a promise.
 ### Example use
 
 ```js
-var app = angular.module('starter', ['ionic', 'fileLogger']);
-
-app.controller('mainCtrl', ['$scope', '$fileLogger', function($scope, $fileLogger) {
+angular.module('starter', ['ionic', 'fileLogger'])
+  .controller('mainCtrl', ['$scope', '$fileLogger', function($scope, $fileLogger) {
 
   function testing() {
 
