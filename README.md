@@ -16,6 +16,12 @@ When you run your application in browser with „ionic serve” the Logger uses 
 
 ## Installation
 
+Add cordova plugin:
+
+```bash
+$ cordova plugin add org.apache.cordova.file
+```
+
 Install manually, or from bower:
 
 ```bash
