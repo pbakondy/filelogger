@@ -35,13 +35,24 @@ angular.module('fileLogger', ['ngCordova.plugins.file'])
 
       var messages = Array.prototype.slice.call(arguments, 1);
       var message = [ timestamp, level ];
+      var text;
 
       for (var i = 0; i < messages.length; i++ ) {
         if (angular.isArray(messages[i])) {
-          message.push(JSON.stringify(messages[i]));
+          text = '[Array]';
+          try {
+            // avoid "TypeError: Converting circular structure to JSON"
+            text = JSON.stringify(messages[i]);
+          } catch(e) {}
+          message.push(text);
         }
         else if (angular.isObject(messages[i])) {
-          message.push(JSON.stringify(messages[i]));
+          text = '[Object]';
+          try {
+            // avoid "TypeError: Converting circular structure to JSON"
+            text = JSON.stringify(messages[i]);
+          } catch(e) {}
+          message.push(text);
         }
         else {
           message.push(messages[i]);
