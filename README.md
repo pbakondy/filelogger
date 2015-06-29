@@ -12,14 +12,14 @@ When you run your application in browser with „ionic serve” the Logger uses 
 ## Dependencies
 
 - [ngCordova](http://ngcordova.com/) ( required version v0.1.14-alpha )
-- [org.apache.cordova.file](https://github.com/apache/cordova-plugin-file)
+- [cordova-plugin-file](https://github.com/apache/cordova-plugin-file)
 
 ## Installation
 
 Add cordova plugin:
 
 ```bash
-$ cordova plugin add org.apache.cordova.file
+$ cordova plugin add cordova-plugin-file
 ```
 
 Install manually, or from bower:
