@@ -1,10 +1,12 @@
 /* global angular, console, cordova */
 
-// install   :     cordova plugin add org.apache.cordova.file
+// install   :     cordova plugin add cordova-plugin-file
 
 angular.module('fileLogger', ['ngCordova.plugins.file'])
 
-  .factory('$fileLogger', ['$q', '$window', '$cordovaFile', '$timeout', function ($q, $window, $cordovaFile, $timeout) {
+  .factory('$fileLogger', ['$q', '$window', '$cordovaFile', '$timeout',
+    function ($q, $window, $cordovaFile, $timeout) {
+
     'use strict';
 
 
@@ -235,6 +237,29 @@ angular.module('fileLogger', ['ngCordova.plugins.file'])
     }
 
 
+    function checkFile() {
+      var q = $q.defer();
+
+      if (isBrowser()) {
+
+        q.resolve({
+          'name': storageFilename,
+          'localURL': 'localStorage://localhost/' + storageFilename,
+          'type': 'text/plain',
+          'size': ($window.localStorage[storageFilename] ? $window.localStorage[storageFilename].length : 0)
+        });
+
+      } else {
+
+        $cordovaFile.checkFile(cordova.file.dataDirectory, storageFilename).then(function(fileEntry) {
+          fileEntry.file(q.resolve, q.reject);
+        }, q.reject);
+
+      }
+
+      return q.promise;
+    }
+
     function debug() {
       var args = Array.prototype.slice.call(arguments, 0);
       args.unshift('DEBUG');
@@ -268,6 +293,7 @@ angular.module('fileLogger', ['ngCordova.plugins.file'])
       getLogfile: getLogfile,
       deleteLogfile: deleteLogfile,
       setStorageFilename: setStorageFilename,
+      checkFile: checkFile,
       debug: debug,
       info: info,
       warn: warn,
