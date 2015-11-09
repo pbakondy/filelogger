@@ -5,6 +5,7 @@
  */
 (function(){
 /* global angular, console, cordova */
+/* eslint no-console:0 */
 
 // install    : cordova plugin add cordova-plugin-file
 // date format: https://docs.angularjs.org/api/ng/filter/date
@@ -57,7 +58,9 @@ angular.module('fileLogger', ['ngCordova.plugins.file'])
           try {
             // avoid "TypeError: Converting circular structure to JSON"
             text = JSON.stringify(messages[i]);
-          } catch(e) {}
+          } catch(e) {
+            // do nothing
+          }
           message.push(text);
         }
         else if (angular.isObject(messages[i])) {
@@ -65,7 +68,9 @@ angular.module('fileLogger', ['ngCordova.plugins.file'])
           try {
             // avoid "TypeError: Converting circular structure to JSON"
             text = JSON.stringify(messages[i]);
-          } catch(e) {}
+          } catch(e) {
+            // do nothing
+          }
           message.push(text);
         }
         else {
