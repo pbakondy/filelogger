@@ -5,7 +5,7 @@
   "authors": [
     "Peter Bakondy <pbakondy@gmail.com>"
   ],
-  "description": "Cordova library to log messages to local filesystem",
+  "description": "Ionic library to log messages to local filesystem",
   "main": "./dist/filelogger.min.js",
   "ignore": [
     "**/.*",
