@@ -1,4 +1,4 @@
-Cordova File Logger
+Ionic File Logger
 ==========
 
 [![Bower](http://img.shields.io/badge/bower-filelogger-FFCC2F.svg?style=flat)](http://bower.io/search/?q=filelogger)
