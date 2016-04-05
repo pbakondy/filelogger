@@ -1,7 +1,7 @@
 module.exports = {
   banner: '/*!\n' +
     ' * fileLogger\n' +
-    ' * Copyright 2015 Peter Bakondy https://github.com/pbakondy\n' +
+    ' * Copyright 2016 Peter Bakondy https://github.com/pbakondy\n' +
     ' * See LICENSE in this repository for license information\n' +
     ' */\n',
 
