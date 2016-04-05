@@ -1,7 +1,9 @@
 Ionic File Logger
 ==========
 
-[![Bower](http://img.shields.io/badge/bower-filelogger-FFCC2F.svg?style=flat)](http://bower.io/search/?q=filelogger)
+[![npm](https://img.shields.io/npm/v/ionic-filelogger.svg)](https://www.npmjs.com/package/ionic-filelogger)
+[![Bower](https://img.shields.io/bower/v/filelogger.svg)](http://bower.io/search/?q=filelogger)
+
 
 Logger module for Ionic projects.
 
