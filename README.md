@@ -1,5 +1,4 @@
-Ionic File Logger
-==========
+# Ionic File Logger
 
 [![npm](https://img.shields.io/npm/v/ionic-filelogger.svg)](https://www.npmjs.com/package/ionic-filelogger)
 [![Bower](https://img.shields.io/bower/v/filelogger.svg)](http://bower.io/search/?q=filelogger)
