@@ -21,9 +21,14 @@ angular.module('fileLogger', ['ngCordova.plugins.file'])
     var dateFormat;
     var dateTimezone;
 
+    // detecting Ripple Emulator
+    // https://gist.github.com/triceam/4658021
+    function isRipple() {
+      return $window.parent && $window.parent.ripple;
+    }
 
     function isBrowser() {
-      return (!$window.cordova && !$window.PhoneGap && !$window.phonegap);
+      return (!$window.cordova && !$window.PhoneGap && !$window.phonegap) || isRipple();
     }
 
 
