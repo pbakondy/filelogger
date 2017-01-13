@@ -10,7 +10,7 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-footer": "^1.0.5",
-    "gulp-header": "^1.8.7",
+    "gulp-header": "^1.8.8",
     "gulp-jshint": "^2.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.4",
